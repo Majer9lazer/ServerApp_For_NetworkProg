@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<teachers>
+  <teacher>
+    <TeacherName>Егор</TeacherName>
+    <TeacherLastName>Сидоренко</TeacherLastName>
+    <TeacherGuid>87a7f159-76eb-43a4-b726-e03085d7e094</TeacherGuid>
+    <TeacherMail>sidorenkoegor1999@mail.ru</TeacherMail>
+    <Groups>
+      <GroupName>SDP-151</GroupName>
+    </Groups>
+  </teacher>
+  <teacher>
+    <TeacherName>Искандер</TeacherName>
+    <TeacherLastName>Раимбаев</TeacherLastName>
+    <TeacherGuid>26d43fda-fcd7-4506-8e04-58092d0d21ed</TeacherGuid>
+    <TeacherMail>IskanderRaimbeyv@gmail.com</TeacherMail>
+    <Groups>
+      <GroupName>PMP-051</GroupName>
+      <GroupName>SEP-093</GroupName>
+    </Groups>
+  </teacher>
+  <teacher>
+    <TeacherName>Евгений</TeacherName>
+    <TeacherLastName>Герцен</TeacherLastName>
+    <TeacherGuid>fdac88b1-1fae-4f63-8ab9-69e3cad0f419</TeacherGuid>
+    <TeacherMail>gertsen.e.a@gmail.com</TeacherMail>
+    <Groups>
+      <GroupName>PMP-063</GroupName>
+      <GroupName>PUB-062</GroupName>
+      <GroupName>SEP-043</GroupName>
+    </Groups>
+  </teacher>
+</teachers>
