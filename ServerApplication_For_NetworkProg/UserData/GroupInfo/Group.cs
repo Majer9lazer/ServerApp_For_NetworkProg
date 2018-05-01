@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
+using ServerApplication_For_NetworkProg.RabbitMq;
 using ServerApplication_For_NetworkProg.UserData.StudentInfo;
 
 namespace ServerApplication_For_NetworkProg.UserData.GroupInfo
@@ -14,6 +15,29 @@ namespace ServerApplication_For_NetworkProg.UserData.GroupInfo
     [Serializable]
     public class Group
     {
+        private readonly PublishMessageClass _publish = new PublishMessageClass();
+        public Group()
+        {
+            _groupDb.Changed += _groupDb_Changed;
+        }
+
+        private void _groupDb_Changed(object sender, XObjectChangeEventArgs e)
+        {
+            XElement s = (XElement)sender;
+          
+            Console.WriteLine($"{e.ObjectChange == XObjectChange.Value} object = {sender} , type = {sender.GetType()}");
+
+            if (e.ObjectChange == XObjectChange.Add)
+                _publish.PublishMessage
+                    (new Group()
+                    {
+                        GroupName = s.Name == nameof(GroupName) ? s.Value : null,
+                        Students = s.Element("students").Elements()
+                            .Select(ss => new Student() { StudentName = ss.Value }).ToList()
+
+                    }, queueName: "StudentAdded");
+        }
+
         private enum GroupNames
         {
             SDP, SEP, PMP, PUB, SMB
@@ -146,7 +170,7 @@ namespace ServerApplication_For_NetworkProg.UserData.GroupInfo
             _groupDb.Root?.Elements().Select(s => new Group()
             {
                 GroupName = s.Element("GroupName")?.Value,
-                Students = s.Element("students")?.Elements().Select(ss=>new Student()
+                Students = s.Element("students")?.Elements().Select(ss => new Student()
                 {
                     StudentName = ss.Value
                 }).ToList()
